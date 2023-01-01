@@ -43,7 +43,7 @@
             <button class="volume">
               <i class="fa-solid fa-volume-high"></i>
             </button>
-            <input type="range" />
+            <input type="range" min="0" max="1" step="any" />
             <div class="video-timer">
               <p class="current-time">00:00</p>
               <p class="seperator">/</p>
@@ -69,11 +69,11 @@
                 </span>
               </button>
               <ul class="speed-options">
-                <li>2x</li>
-                <li>1.5x</li>
-                <li class="active">Normal</li>
-                <li>0.75x</li>
-                <li>0.5x</li>
+                <li data-speed="2">2x</li data-speed="">
+                <li data-speed="1.5">1.5x</li data-speed="">
+                <li data-speed="1" class="active">Normal</li>
+                <li data-speed="0.75">0.75x</li data-speed="">
+                <li data-speed="0.5">0.5x</li>
               </ul>
             </div>
             <button class="pic-in-pic">
@@ -87,5 +87,6 @@
       </div>
       <video src="Welcome to India.mp4"></video>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

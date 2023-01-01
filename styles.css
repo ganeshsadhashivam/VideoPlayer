@@ -16,6 +16,7 @@
 body {
   min-height: 100vh;
   background: #e3f2fd;
+  /* background: #1c1917; */
 }
 li {
   list-style: none;
@@ -36,6 +37,11 @@ body,
   border-radius: 5px;
   overflow: hidden;
   position: relative;
+}
+
+.container.fullscreen {
+  max-width: 100%;
+  width: 100%;
 }
 
 .wrapper {
@@ -81,7 +87,7 @@ body,
   transform: translateX(-50%);
 }
 .progress-area .progress-bar {
-  width: 50%;
+  width: 0%;
   height: 100%;
   background: #2289ff;
   position: relative;
@@ -172,7 +178,7 @@ body,
   transition: opacity 0.13s ease;
 }
 
-.playback-content button:hover ~ .speed-options {
+.playback-content .speed-options.show {
   opacity: 1;
   pointer-events: auto;
 }
