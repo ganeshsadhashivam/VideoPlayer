@@ -13,6 +13,29 @@ const container = document.querySelector(".container"),
   speedOptions = container.querySelector(".speed-options"),
   picInPicBtn = container.querySelector(".pic-in-pic span"),
   fullScreenBtn = container.querySelector(".fullscreen i");
+let timer;
+
+//hide controls
+
+const hideControls = () => {
+  //if video is paused return
+  if (mainVideo.paused) return;
+  // remove show-controls class after 3
+  timer = setTimeout(() => {
+    container.classList.remove("show-controls");
+  }, 3000);
+};
+
+hideControls();
+
+container.addEventListener("mousemove", () => {
+  // add show-controls class on mousemove
+  container.classList.add("show-controls");
+  //clear timer
+  clearTimeout(timer);
+  //calling hidecontrols
+  hideControls();
+});
 
 const formatTime = (time) => {
   // getting seconds, minutes, hours
@@ -58,6 +81,47 @@ videoTimeline.addEventListener("click", (e) => {
   let timelineWidth = videoTimeline.clientWidth;
   //updating video currentTime
   mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+});
+
+//draggable progress bar
+
+const draggableProgressBar = () => {
+  // getting videoTimeline width
+  let timelineWidth = videoTimeline.clientWidth;
+  // passing offsetX value as progressbar width
+  progressBar.style.width = `${e.offsetX}px`;
+  //updating video currentTime
+  mainVideo.currentTime = (e.offsetX / timelineWidth) * mainVideo.duration;
+  // passing video current time as currentVidTime innertext
+
+  currentVidTime.innerText = formatTime(mainVideo.currentTime);
+};
+
+videoTimeline.addEventListener("mousedown", () => {
+  // calling draggableProgress function on mousemove event
+  videoTimeline.addEventListener("mousemove", draggableProgressBar);
+});
+
+document.addEventListener("mouseup", () => {
+  // removing mousemove listener on mouseup event
+  videoTimeline.removeEventListener("mousemove", draggableProgressBar);
+});
+
+//updating progress bar based on slide
+
+videoTimeline.addEventListener("mousemove", (e) => {
+  const progressTime = videoTimeline.querySelector("span");
+  // getting mouseX position
+  let offsetX = e.offsetX;
+  //passing offsetX value as progressTime left value
+  progressTime.style.left = `${offsetX}px`;
+  // getting videoTimeline width
+  let timelineWidth = videoTimeline.clientWidth;
+  //getting percent
+  let percent = (e.offsetX / timelineWidth) * mainVideo.duration;
+  //passing percent as progressilime innerText
+  progressTime.innerText = formatTime(percent);
+  console.log(formatTime(percent));
 });
 
 //volume mute & unmute

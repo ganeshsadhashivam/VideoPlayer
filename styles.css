@@ -48,10 +48,19 @@ body,
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: -15px;
   z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.08s ease;
 }
 
+.container.show-controls .wrapper {
+  bottom: 0px;
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.13s ease;
+}
 .wrapper::before {
   content: "";
   bottom: 0;
